@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverageOfDices", "AverageOfDices\AverageOfDices.csproj", "{84028151-B1D6-49DB-BAA0-760E6B333AA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AverageOfDices.Tests", "AverageOfDices.Tests\AverageOfDices.Tests.csproj", "{AEA903EF-4DE6-4A4E-9083-0004FE683385}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84028151-B1D6-49DB-BAA0-760E6B333AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84028151-B1D6-49DB-BAA0-760E6B333AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84028151-B1D6-49DB-BAA0-760E6B333AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84028151-B1D6-49DB-BAA0-760E6B333AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA903EF-4DE6-4A4E-9083-0004FE683385}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA903EF-4DE6-4A4E-9083-0004FE683385}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA903EF-4DE6-4A4E-9083-0004FE683385}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA903EF-4DE6-4A4E-9083-0004FE683385}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8265D7AA-AB97-4BD6-A7FB-E7A18191F7D8}
+	EndGlobalSection
+EndGlobal
