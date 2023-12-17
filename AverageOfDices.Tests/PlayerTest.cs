@@ -10,8 +10,8 @@ namespace AverageOfDices.Tests
 
             //Arrange
 
-            player1m.AddDice(20);
-            player1m.AddDice(8);
+            player1m.AddDice("20");
+            player1m.AddDice("8");
 
             //Act
 

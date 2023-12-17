@@ -2,7 +2,6 @@
 {
     public class PlayerInFile : BasePlayer
     {
-        private List<int> dices = new List<int>();
         private string fileName;
 
         public PlayerInFile(string name)
@@ -10,20 +9,18 @@
         {
             fileName = "Throws" + name + ".txt";
         }
-        public override void AddDice(string dice)
+        public override void AddDice(int dice)
         {
-            var parsingResult = int.TryParse(dice, out int result);
-            if (!parsingResult)
+            if (dice >= 1 && dice <= 20)
             {
-                throw new InvalidOperationException();
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(dice);
+                }
             }
-            if (result >= 0 && result <= 20)
+            else
             {
-                dices.Add(result);
-            }
-            using (var writer = File.AppendText(fileName))
-            {
-                writer.WriteLine(dice);
+                throw new Exception("invalid dice throw value");
             }
         }
         public override Statistics GetPlayerStatistics()
@@ -52,17 +49,6 @@
                 }
             }
             return dices;
-        }
-        public override void AddDice(int dice)
-        {
-            if (dice >= 0 && dice <= 20)
-            {
-                dices.Add(dice);
-            }
-            else
-            {
-                throw new Exception("invalid dice throw value");
-            }
         }
         private Statistics CountPlayerStatistics(List<int> dices)
         {

@@ -4,15 +4,17 @@ Console.WriteLine("Witamy w programie do zapisywania rzutów kością");
 Console.WriteLine("===============================================");
 Console.WriteLine();
 
-var player1f = new PlayerInFile("Driarith");
-var player2f = new PlayerInFile("Ruta");
-var player3f = new PlayerInFile("Ragval");
-var player4f = new PlayerInFile("Loki");
+var playerInFileArray = new PlayerInFile[] {
+    new PlayerInFile("Driarith"), 
+    new PlayerInFile("Ruta"), 
+    new PlayerInFile("Ragval"), 
+    new PlayerInFile("Loki") };
 
-var player1m = new PlayerInMemory("Driarith");
-var player2m = new PlayerInMemory("Ruta");
-var player3m = new PlayerInMemory("Ragval");
-var player4m = new PlayerInMemory("Loki");
+var playerInMemoryArray = new PlayerInMemory[] {
+    new PlayerInMemory("Driarith"), 
+    new PlayerInMemory("Ruta"), 
+    new PlayerInMemory("Ragval"), 
+    new PlayerInMemory("Loki") };
 
 bool CloseApp = false;
 
@@ -25,15 +27,15 @@ while (!CloseApp)
         "Q - Zamknij program i przejdz do podsumowania.\n");
 
     Console.WriteLine("Co chcesz zrobić?\nWybierz odpowiedni znak 1, 2 lub Q");
-    var userInput = Console.ReadLine().ToUpper();
+    var userInput = Console.ReadLine()!.ToUpper();
 
     switch (userInput)
     {
         case "1":
-            AddDicesToMemory();
+            AddDicesToPlayer(playerInMemoryArray);
             break;
         case "2":
-            AddDicesToTxtFile();
+            AddDicesToPlayer(playerInFileArray);
             break;
         case "Q":
             CloseApp = true;
@@ -43,54 +45,40 @@ while (!CloseApp)
             continue;
     }
 }
-
-
-void AddDicesToMemory()
+void AddDicesToPlayer(BasePlayer[] playerArray)
 {
     Console.WriteLine("Wybierz gracza któremu chcesz dodać rzuty, żeby zakończyć dodawanie wciśnij q:\n" +
-    "============\n" +
-    "Driarith - 1\n" +
-    "Ruta     - 2\n" +
-    "Raghval  - 3\n" +
-    "Loki     - 4\n" +
-    "============\n");
+"============\n" +
+"Driarith - 1\n" +
+"Ruta     - 2\n" +
+"Raghval  - 3\n" +
+"Loki     - 4\n" +
+"============\n");
 
     while (true)
     {
         Console.WriteLine("Wybierz gracza któremu chcesz dodać rzuty, żeby zakończyć dodawanie wciśnij q:");
-        var input = Console.ReadLine().ToUpper();
+        var input = Console.ReadLine()!.ToUpper();
         if (input == "Q")
         {
             break;
         }
         try
         {
-            switch (input)
+            var parsingResult = int.TryParse(input, out var number);
+            if (parsingResult == false)
             {
-                case "1":
-                    Console.WriteLine("Wybrałeś Driarith, podaj rzut:");
-                    var input1m = Console.ReadLine();
-                    player1m.AddDice(input1m);
-                    break;
-                case "2":
-                    Console.WriteLine("Wybrałeś Rute, podaj rzut:");
-                    var input2m = Console.ReadLine();
-                    player2m.AddDice(input2m);
-                    break;
-                case "3":
-                    Console.WriteLine("Wybrałeś Raghvala, podaj rzut:");
-                    var input3m = Console.ReadLine();
-                    player3m.AddDice(input3m);
-                    break;
-                case "4":
-                    Console.WriteLine("Wybrałeś Lokiego, podaj rzut:");
-                    var input4m = Console.ReadLine();
-                    player4m.AddDice(input4m);
-                    break;
-                default:
-                    Console.WriteLine("Invalid Throw.\n");
-                    continue;
+                Console.WriteLine("Podaj liczbę.");
             }
+            var arrayLength = playerArray.Length;
+            if (number > arrayLength)
+            {
+                Console.WriteLine("Liczba po za zakresem graczy.");
+                continue;
+            }
+            Console.WriteLine($"Wybrałeś {playerArray[number - 1].Name}, podaj rzut:");
+            var diceInput = Console.ReadLine();
+            playerArray[number - 1].AddDice(diceInput!);
         }
         catch (InvalidOperationException e)
         {
@@ -98,77 +86,20 @@ void AddDicesToMemory()
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Exception catched: {e.Message}");
+            Console.WriteLine($"Exception caught: {e.Message}");
         }
     }
 }
 
-void AddDicesToTxtFile()
-{
-    Console.WriteLine("Wybierz gracza któremu chcesz dodać rzuty, żeby zakończyć dodawanie wciśnij q:\n" +
-    "============\n" +
-    "Driarith - 1\n" +
-    "Ruta     - 2\n" +
-    "Raghval  - 3\n" +
-    "Loki     - 4\n" +
-    "============\n");
+var statistics1m = playerInMemoryArray[0].GetPlayerStatistics();
+var statistics2m = playerInMemoryArray[1].GetPlayerStatistics();
+var statistics3m = playerInMemoryArray[2].GetPlayerStatistics();
+var statistics4m = playerInMemoryArray[3].GetPlayerStatistics();
 
-    while (true)
-    {
-        Console.WriteLine("Wybierz gracza któremu chcesz dodać rzuty, żeby zakończyć dodawanie wciśnij q:");
-        var input = Console.ReadLine().ToUpper();
-        if (input == "Q")
-        {
-            break;
-        }
-        try
-        {
-            switch (input)
-            {
-                case "1":
-                    Console.WriteLine("Wybrałeś Driarith, podaj rzut:");
-                    var input1f = Console.ReadLine().ToUpper();
-                    player1f.AddDice(input1f);
-                    break;
-                case "2":
-                    Console.WriteLine("Wybrałeś Rute, podaj rzut:");
-                    var input2f = Console.ReadLine().ToUpper();
-                    player2f.AddDice(input2f);
-                    break;
-                case "3":
-                    Console.WriteLine("Wybrałeś Raghvala, podaj rzut:");
-                    var input3f = Console.ReadLine().ToUpper();
-                    player3f.AddDice(input3f);
-                    break;
-                case "4":
-                    Console.WriteLine("Wybrałeś Lokiego, podaj rzut:");
-                    var input4f = Console.ReadLine().ToUpper();
-                    player4f.AddDice(input4f);
-                    break;
-                default:
-                    Console.WriteLine("Invalid Throw.\n");
-                    continue;
-            }
-        }
-        catch (InvalidOperationException e)
-        {
-            Console.WriteLine($"Exception caught, couldn't parse: {e.Message}");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Exception catched: {e.Message}");
-        }
-    }
-}
-var statistics1m = player1m.GetPlayerStatistics();
-var statistics2m = player2m.GetPlayerStatistics();
-var statistics3m = player3m.GetPlayerStatistics();
-var statistics4m = player4m.GetPlayerStatistics();
-
-var statistics1f = player1f.GetPlayerStatistics();
-var statistics2f = player2f.GetPlayerStatistics();
-var statistics3f = player3f.GetPlayerStatistics();
-var statistics4f = player4f.GetPlayerStatistics();
+var statistics1f = playerInFileArray[0].GetPlayerStatistics();
+var statistics2f = playerInFileArray[1].GetPlayerStatistics();
+var statistics3f = playerInFileArray[2].GetPlayerStatistics();
+var statistics4f = playerInFileArray[3].GetPlayerStatistics();
 
 Console.WriteLine("-------------------------------");
 

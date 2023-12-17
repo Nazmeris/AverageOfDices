@@ -2,8 +2,8 @@
 {
     public class Statistics
     {
-        public float Min { get; private set; }
-        public float Max { get; private set; }
+        public int Min { get; private set; }
+        public int Max { get; private set; }
         public float Sum { get; private set; }
         public int Count { get; private set; }
         public string ThrowAverage
@@ -22,18 +22,17 @@
                         return "Below Average";
                     case >= 1:
                         return "Very Bad";
-                    case < 1:
-                        return "Not Applicable";
                     default:
-                        return "Something went bad";
+                        return "Not Applicable";
                 }
             }
         }
-        public float Average
+        public double Average
         {
             get
             {
-                return Sum / Count;
+                double result = Sum / Count;
+                return Math.Round(result,2);
             }
         }
 
@@ -41,10 +40,10 @@
         {
             Count = 0;
             Sum = 0;
-            Max = float.MinValue;
-            Min = float.MaxValue;
+            Max = int.MinValue;
+            Min = int.MaxValue;
         }
-        public void CalculateStatistics(float dice)
+        public void CalculateStatistics(int dice)
         {
             Count++;
             Sum += dice;
